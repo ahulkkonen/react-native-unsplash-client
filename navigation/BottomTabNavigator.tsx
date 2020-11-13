@@ -1,4 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, SimpleLineIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
@@ -22,14 +22,14 @@ export default function BottomTabNavigator() {
         name="Feed"
         component={FeedNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <SimpleLineIcons name="feed" size={24} color={color} />,
         }}
       />
       <BottomTab.Screen
         name="Favorites"
         component={FavoritesNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-heart-empty" color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -52,7 +52,7 @@ function FeedNavigator() {
       <FeedStack.Screen
         name="FeedScreen"
         component={FeedScreen}
-        options={{ headerTitle: 'Unsplash Feed' }}
+        options={{ headerTitle: 'Feed' }}
       />
     </FeedStack.Navigator>
   );
@@ -66,7 +66,7 @@ function FavoritesNavigator() {
       <FavoritesStack.Screen
         name="FavoritesScreen"
         component={FavoritesScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+        options={{ headerTitle: 'Favorites' }}
       />
     </FavoritesStack.Navigator>
   );
