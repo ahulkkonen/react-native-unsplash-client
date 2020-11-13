@@ -15,3 +15,9 @@ export type FeedParamList = {
 export type FavoritesParamList = {
   FavoritesScreen: undefined;
 };
+
+export type Color = {
+  r: number,
+  g: number,
+  b: number
+}
