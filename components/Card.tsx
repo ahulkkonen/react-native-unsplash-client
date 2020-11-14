@@ -1,9 +1,10 @@
 import React from 'react';
-import { Button, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Button, Image, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
 import { addFavorite } from '../state/favorites/actions';
 import { fetchRequest } from '../state/images/actions';
 import { Text, View } from '../components/Themed';
+import FadeIn from 'react-native-fade-in-image';
 
 export function Card(props: {
     key: string,
@@ -12,9 +13,15 @@ export function Card(props: {
 }) {
     //const dispatch = useDispatch();
 
+    let [loading, setLoading] = React.useState(true);
+
     return (
         <View style={styles.container}>
-            <Image source={{ uri: props.src }} style={styles.image} />
+            <FadeIn>
+            <ImageBackground source={{ uri: props.src }} style={styles.image} onLoadEnd={() => {setLoading(false)}}>
+                <ActivityIndicator size="large" animating={loading}/>
+            </ImageBackground>
+            </FadeIn>
         </View>
     )
 }
@@ -25,7 +32,7 @@ const styles = StyleSheet.create({
         width: '90%',
         height: '160px',
         marginBottom: 20,
-        backgroundColor: 'grey',
+        backgroundColor: 'lightgray',
         borderWidth: 0,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
@@ -39,6 +46,9 @@ const styles = StyleSheet.create({
     },
 
     image: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         width: '100%',
         height: '100%',
         resizeMode: 'cover'

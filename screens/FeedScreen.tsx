@@ -36,6 +36,10 @@ export default function FeedScreen() {
           data={images}
           renderItem={renderItem}
           keyExtractor={(image: UnsplashItem) => image.id}
+          onEndReachedThreshold={0.5}
+          onEndReached={() => {
+            fetchImages();
+          }}
         />
       </View>
     </View>

@@ -7,18 +7,24 @@ const API_COUNT = 30;
 const API_ORIENTATION = 'landscape';
 const API_FEATURED = true;
 
+let INITIAL_REQUEST = true;
+
 async function callApi(method: string, url: string, path: string, queryParams?: string) {
     // Disable for now so we dont go over the api limit per hour
-    /*const res = await fetch(`${url}${path}?client_id=${API_KEY}${queryParams}`, {
+    if (INITIAL_REQUEST) {
+        INITIAL_REQUEST = false;
+
+        return EXAMPLE_RESPONSE;
+    }
+
+    const res = await fetch(`${url}${path}?client_id=${API_KEY}${queryParams}`, {
         method,
         headers: {
             Accept: 'application/json'
         }
     });
     
-    return res.json();*/
-
-    return EXAMPLE_RESPONSE;
+    return res.json();
 }
 
 function generateQueryParams() {
