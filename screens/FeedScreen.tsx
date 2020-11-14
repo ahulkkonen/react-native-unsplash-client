@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { FlatList, StyleSheet, ListRenderItem } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import { Card } from '../components/Card';
 import { useSelector } from 'react-redux'
@@ -9,6 +9,7 @@ import { Text, View } from '../components/Themed';
 import { ApplicationState } from '../state';
 import { fetchRequest } from '../state/images/actions';
 import { getImageSrc } from '../utils/images';
+import { UnsplashItem } from '../state/images/types';
 
 export default function FeedScreen() {
   const dispatch = useDispatch();
@@ -22,20 +23,20 @@ export default function FeedScreen() {
   // initial fetch
   if (images.length === 0) fetchImages();
 
-  {console.log(images)}
+  { console.log(images) }
+
+  const renderItem = ({ item }: { item: UnsplashItem }) => (
+    <Card key={item.id} src={getImageSrc(item)} id={item.id} />
+  );
 
   return (
-    
     <View style={styles.container}>
       <View style={styles.cards}>
-      {/* print images */}
-      {images.map(image => {
-        console.log(image.id);
-
-        return(
-          <Card key={image.id} src={getImageSrc(image)} id={image.id} />
-        )
-      })}
+        <FlatList
+          data={images}
+          renderItem={renderItem}
+          keyExtractor={(image: UnsplashItem) => image.id}
+        />
       </View>
     </View>
   );
@@ -46,17 +47,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   cards: {
-    width: '90%',
+    width: '100%',
     flex: 1,
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
   },
 });
 

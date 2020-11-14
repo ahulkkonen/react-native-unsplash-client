@@ -21,9 +21,10 @@ export function Card(props: {
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
-        height: '33%',
-        margin: 20,
+        margin: 'auto',
+        width: '90%',
+        height: '128px',
+        marginBottom: 20,
         backgroundColor: 'grey',
         borderWidth: 1,
         borderTopLeftRadius: 10,
