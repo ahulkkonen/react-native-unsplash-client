@@ -41,9 +41,11 @@ export function Card(props: {
                         setLoading(false);
                     }}
                 >
-                    <TouchableOpacity style={{flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', marginRight: 20, marginBottom: 20}} onPress={handleHeartPressed}>
-                        <Ionicons style={{}} name={(heartPressed) ? 'ios-heart' : 'ios-heart-empty'} color={'#ff0000'} size={38} />
-                    </TouchableOpacity>
+                    <View style={{backgroundColor: 'transparent',flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', marginRight: 20, marginBottom: 20}}>
+                        <TouchableOpacity onPress={handleHeartPressed}>
+                            <Ionicons style={{}} name={(heartPressed) ? 'ios-heart' : 'ios-heart-empty'} color={'#ff0000'} size={38} />
+                         </TouchableOpacity>
+                    </View>
                 </ImageBackground>
             </Animated.View>
 
