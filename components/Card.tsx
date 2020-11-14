@@ -1,10 +1,9 @@
 import React from 'react';
-import { ActivityIndicator, Button, Image, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Button, Image, ImageBackground, StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
 import { addFavorite } from '../state/favorites/actions';
 import { fetchRequest } from '../state/images/actions';
 import { Text, View } from '../components/Themed';
-import FadeIn from 'react-native-fade-in-image';
 
 export function Card(props: {
     key: string,
@@ -14,23 +13,45 @@ export function Card(props: {
     //const dispatch = useDispatch();
 
     let [loading, setLoading] = React.useState(true);
+    const imageOpacity = new Animated.Value(0);
 
     return (
         <View style={styles.container}>
-            <FadeIn>
-            <ImageBackground source={{ uri: props.src }} style={styles.image} onLoadEnd={() => {setLoading(false)}}>
-                <ActivityIndicator size="large" animating={loading}/>
-            </ImageBackground>
-            </FadeIn>
+            {loading && <ActivityIndicator size="large" animating={loading}/>}
+
+            <Animated.View style={
+                {
+                    width: '100%',
+                    height: '100%',
+                    opacity: 1,
+                    maxHeight: loading ?  0 : '100%'
+                }
+            }>
+                <Image
+                    source={{ uri: props.src }} 
+                    style={styles.image}
+                
+                    onLoadEnd={() => {
+                        setLoading(false);
+
+                        Animated.timing(imageOpacity, {
+                            toValue: 1,
+                            duration: 500,
+                            useNativeDriver: true,
+                        }).start();
+                    }}
+                />
+            </Animated.View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        margin: 'auto',
+        marginLeft: 20,
+        marginRight: 20,
         width: '90%',
-        height: '160px',
+        minHeight: 160,
         marginBottom: 20,
         backgroundColor: 'lightgray',
         borderWidth: 0,
@@ -42,13 +63,12 @@ const styles = StyleSheet.create({
         shadowOffset: {width: 0, height: 0},
         shadowRadius: 10,
         shadowColor: 'rgba(0, 0, 0, 0.5)',
-
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
     image: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         width: '100%',
         height: '100%',
         resizeMode: 'cover'

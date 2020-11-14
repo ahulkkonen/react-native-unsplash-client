@@ -36,7 +36,7 @@ export default function FeedScreen() {
           data={images}
           renderItem={renderItem}
           keyExtractor={(image: UnsplashItem) => image.id}
-          onEndReachedThreshold={0.5}
+          onEndReachedThreshold={0.2}
           onEndReached={() => {
             fetchImages();
           }}
@@ -54,6 +54,8 @@ const styles = StyleSheet.create({
   cards: {
     width: '100%',
     flex: 1,
+    justifyContent: 'center',
+    flexDirection: 'column',
   },
   title: {
     fontSize: 20,

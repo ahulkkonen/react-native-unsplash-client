@@ -7,6 +7,24 @@ export const initialState: ImageState = {
     loading: false
 }
 
+const mergeArrays = (...arrays: any[]) => {
+    let jointArray: any[] = []
+
+    arrays.forEach(array => {
+        jointArray = [...jointArray, ...array]
+    })
+
+    const uniqueArray = jointArray.reduce((newArray, item) =>{
+        if (newArray.includes(item)){
+            return newArray
+        } else {
+            return [...newArray, item]
+        }
+    }, [])
+
+    return uniqueArray
+}
+
 const reducer: Reducer<ImageState> = (state = initialState, action) => {
     switch (action.type) {
         case ImagesActionTypes.FETCH_REQUEST: {        
@@ -18,10 +36,7 @@ const reducer: Reducer<ImageState> = (state = initialState, action) => {
             /**
              * merge arrays instead of nesting them like [[<images>], [<images>]]
              */
-            let newState = [...state.data, ...action.payload];
-            newState = newState.filter((obj, pos, arr) => {
-                return arr.map(mapObj => mapObj.id.indexOf(obj.id) !== pos);
-            });
+            let newState = mergeArrays(state.data, action.payload);
         
             return { ...state, loading: false, data: newState }
         }
