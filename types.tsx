@@ -27,9 +27,3 @@ export type Color = {
   g: number,
   b: number
 }
-
-const asd: UnsplashItem = {
-  id: 1,
-  src: '',
-  colors: [{r: 1, g: 2, b: 3}, {r: 1, g: 2, b: 3}]
-}

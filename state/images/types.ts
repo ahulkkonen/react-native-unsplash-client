@@ -4,7 +4,6 @@ export enum ImagesActionTypes {
     FETCH_ERROR = '@@IMAGES/FETCH_ERROR'
 }
 
-
 export interface ImageState {
     readonly loading: boolean
     readonly data: UnsplashItem[]

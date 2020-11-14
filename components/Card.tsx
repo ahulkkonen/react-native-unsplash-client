@@ -1,12 +1,18 @@
 import React from 'react';
-import { Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { Button, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux'
+import { addFavorite } from '../state/favorites/actions';
 
 export function Card(props: {
     id: number,
     src: string,
 }) {
+    const dispatch = useDispatch();
+
     return (
-        <Image source={{ uri: props.src }}
-            style={{ width: 400, height: 400 }} />
+        /*<Image source={{ uri: props.src }}
+        style={{ width: 400, height: 400 }} />*/
+
+        <Button title={"Press me"} onPress={() => {dispatch(addFavorite('lol'))}}></Button>
     )
 }
