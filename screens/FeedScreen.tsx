@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FlatList, StyleSheet, ListRenderItem } from 'react-native';
+import { FlatList, StyleSheet, ListRenderItem, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Card } from '../components/Card';
 import { useSelector } from 'react-redux'
@@ -8,8 +8,9 @@ import { View } from '../components/Themed';
 import { ApplicationState } from '../state';
 import { fetchRequest } from '../state/images/actions';
 import { UnsplashItem } from '../state/images/types';
+import { Zocial } from '@expo/vector-icons';
 
-export default function FeedScreen() {
+export default function FeedScreen(params: any) {
   const dispatch = useDispatch();
 
   const fetchImages = () => {
@@ -21,10 +22,8 @@ export default function FeedScreen() {
   // initial fetch
   if (images.length === 0) fetchImages();
 
-  { console.log(images) }
-
   const renderItem = ({ item }: { item: UnsplashItem }) => (
-    <Card key={item.id} item={item} favorite={false} />
+    <Card key={item.id} item={item} favorite={false} navigation={params.navigation} />
   );
 
   return (

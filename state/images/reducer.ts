@@ -27,9 +27,7 @@ const mergeArrays = (...arrays: any[]) => {
 
 const reducer: Reducer<ImageState> = (state = initialState, action) => {
     switch (action.type) {
-        case ImagesActionTypes.FETCH_REQUEST: {        
-            console.log('FETCH_REQUEST');
-    
+        case ImagesActionTypes.FETCH_REQUEST: {            
             return { ...state, loading: true }
         }
         case ImagesActionTypes.FETCH_SUCCESS: {

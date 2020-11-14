@@ -12,9 +12,11 @@ import { ApplicationState } from '../state';
 export function Card(props: {
     key: string,
     favorite: boolean,
-    item: UnsplashItem
+    item: UnsplashItem,
+    navigation: any
 }) {
     const id = props.item.id;
+    let isUnmounted = false;
 
     const dispatch = useDispatch();
 
@@ -26,7 +28,15 @@ export function Card(props: {
         if (favorites.find((image: UnsplashItem) => image.id === id) === undefined) setFavorite(false);
     }, [favorites])
     
+    React.useEffect(() => {
+        return () => {
+            // Anything in here is fired on component unmount.
+            isUnmounted = true;
+        }
+    }, [])
+
     const handleImageClicked = (event: GestureResponderEvent) => {
+        props.navigation.navigate('ViewImage', { item: props.item })
     }
 
     const handleHeartPressed = (event: GestureResponderEvent) => {
@@ -60,7 +70,13 @@ export function Card(props: {
                     style={styles.image}
 
                     onLoadEnd={() => {
-                        setLoading(false);
+                        /**
+                         * Tried to fix unmount component state updating issue
+                         * but it seems its a bug in react native.
+                         * 
+                         * I removed all useStates to try it out and the same error appeared.
+                         */
+                        if (!isUnmounted) setLoading(false);
                     }}
                 >
                     <View style={{ backgroundColor: 'transparent', flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', marginRight: 20, marginBottom: 20 }}>

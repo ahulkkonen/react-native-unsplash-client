@@ -11,13 +11,11 @@ import { fetchRequest } from '../state/images/actions';
 import { getImageSrc } from '../utils/images';
 import { UnsplashItem } from '../state/images/types';
 
-export default function FavoitesScreen() {
+export default function FavoitesScreen(params: any) {
   const favorites = useSelector((state: ApplicationState) => state.favorites.data);
 
-  { console.log(favorites) }
-
   const renderItem = ({ item }: { item: UnsplashItem }) => (
-    <Card key={item.id} item={item} favorite={true} />
+    <Card key={item.id} item={item} favorite={true} navigation={params.navigation} />
   );
 
   return (
@@ -49,22 +47,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-/*const mapStateToProps = ({ images }: ApplicationState) => ({
-  loading: images.loading,
-  errors: images.errors,
-  data: images.data
-})
-
-// mapDispatchToProps is especially useful for constraining our actions to the connected component.
-// You can access these via `this.props`.
-const mapDispatchToProps = {
-  fetchRequest
-}
-
-// Now let's connect our component!
-// With redux v4's improved typings, we can finally omit generics here.
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FeedScreen)*/

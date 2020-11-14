@@ -1,5 +1,6 @@
 export type RootStackParamList = {
   Root: undefined;
+  ViewImage: undefined;
   NotFound: undefined;
 };
 
@@ -14,6 +15,10 @@ export type FeedParamList = {
 
 export type FavoritesParamList = {
   FavoritesScreen: undefined;
+};
+
+export type ViewImageParamList = {
+  ViewImageScreen: undefined;
 };
 
 export type Color = {
