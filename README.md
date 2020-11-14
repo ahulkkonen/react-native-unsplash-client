@@ -4,26 +4,25 @@ Unsplash image browser app made in React Native (+Expo). Created for self learni
 [![Watch the video](/video_thumbnail.png)](https://www.youtube.com/watch?v=IFI9DbExUC4)
 
 ## What was totally new for me
-✅ TypeScript
-✅ Redux-Saga
+✅ TypeScript  
+✅ Redux-Saga  
 
 ## Somewhat familiar (but I learned more)
-✅ Redux
-✅ React (Functional components)
-✅ Expo
-✅ React Native
+✅ Redux  
+✅ React (Functional components)  
+✅ Expo  
+✅ React Native  
 
 ## Installation
 Create .env file with 
 ```
 UNSPLASH_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
-[Get your key here](https://unsplash.com/developers)
-  
-Then run
+[Get your key here](https://unsplash.com/developers). When that is done you can run
 ```bash
 yarn
 ```
+to install assets.
 
 ## Running
 Open Expo with
