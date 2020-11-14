@@ -10,12 +10,14 @@ const API_FEATURED = true;
 let INITIAL_REQUEST = true;
 
 async function callApi(method: string, url: string, path: string, queryParams?: string) {
-    // Disable for now so we dont go over the api limit per hour
-    if (INITIAL_REQUEST) {
+    /**
+     * Comment back if yu
+     */
+    /*if (INITIAL_REQUEST) {
         INITIAL_REQUEST = false;
 
         return EXAMPLE_RESPONSE;
-    }
+    }*/
 
     const res = await fetch(`${url}${path}?client_id=${API_KEY}${queryParams}`, {
         method,

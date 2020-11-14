@@ -45,7 +45,7 @@ export default function FeedScreen(params: any) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    paddingTop: 20,
     flex: 1,
   },
   cards: {

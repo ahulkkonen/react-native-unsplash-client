@@ -20,21 +20,31 @@ export default function FavoitesScreen(params: any) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.cards}>
-        <FlatList
-          data={favorites}
-          renderItem={renderItem}
-          keyExtractor={(image: UnsplashItem) => image.id}
-        />
+      {
+        favorites.length > 0 &&
+        <View style={styles.cards}>
+          <FlatList
+            data={favorites}
+            renderItem={renderItem}
+            keyExtractor={(image: UnsplashItem) => image.id}
+          />
+        </View>
+      }
+
+      {
+        favorites.length === 0 &&
+        <Text style={styles.title}>No favorites yet! :(</Text>
+      }
+
       </View>
-    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    paddingTop: 20,
     flex: 1,
+    justifyContent: 'center',
   },
   cards: {
     width: '100%',
@@ -43,6 +53,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   title: {
+    width: '100%',
+    textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
   },
