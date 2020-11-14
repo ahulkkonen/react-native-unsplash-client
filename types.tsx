@@ -16,12 +16,6 @@ export type FavoritesParamList = {
   FavoritesScreen: undefined;
 };
 
-export type UnsplashItem = {
-  id: number;
-  src: string;
-  colors: Color[];
-}
-
 export type Color = {
   r: number,
   g: number,

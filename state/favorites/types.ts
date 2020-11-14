@@ -1,4 +1,4 @@
-import { UnsplashItem } from "../../types";
+import { UnsplashItem } from "../images/types";
 
 export enum FavoritesActionTypes {
     ADD_FAVORITE = '@@FAVORITES/ADD_FAVORITE',
