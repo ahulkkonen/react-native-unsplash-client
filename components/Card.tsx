@@ -22,8 +22,10 @@ export function Card(props: {
 
     const onShare = async () => {
         try {
+            const description = (props.item.description) ? `\n${props.item.description}` : '';
+            
             await Share.share({
-                message: `Check out this cool picture at Unsplash:\n${props.item.links.html}\n${props.item.description}`,
+                message: `Check out this cool picture at Unsplash:\n\n${props.item.links.html}${description}`,
             });
         } catch (error) {
             console.error(error.message);
