@@ -14,21 +14,31 @@ export function Card(props: {
 
     return (
         <View style={styles.container}>
-            {/*<Image key={props.key} source={{ uri: props.src }} style={{ width: window.screen.width, height: 100 }} />*/}
-            <Text style={styles.title}>{props.id}</Text>
+            <Image key={props.key} source={{ uri: props.src }} style={styles.image} />
         </View>
-        /*<Button title={"Press me"} onPress={() => {dispatch(fetchRequest())}}></Button>*/
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: "row",
         width: '100%',
-        height: 100,
-        padding: 20,
-        backgroundColor: 'red',
+        height: '33%',
+        margin: 20,
+        backgroundColor: 'grey',
+        borderWidth: 1,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+        borderBottomLeftRadius: 5,
+        borderBottomRightRadius: 5,
+        overflow: 'hidden'
     },
+
+    image: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'cover'
+    },
+
     title: {
         fontSize: 1,
         fontWeight: 'bold',

@@ -27,6 +27,7 @@ export default function FeedScreen() {
   return (
     
     <View style={styles.container}>
+      <View style={styles.cards}>
       {/* print images */}
       {images.map(image => {
         console.log(image.id);
@@ -35,11 +36,7 @@ export default function FeedScreen() {
           <Card key={image.id} src={getImageSrc(image)} id={image.id} />
         )
       })}
-
-      <Text style={styles.title}>{}</Text>
-
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/FeedScreen.js" />
+      </View>
     </View>
   );
 }
@@ -47,8 +44,10 @@ export default function FeedScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  cards: {
+    width: '90%',
+    flex: 1,
   },
   title: {
     fontSize: 20,
