@@ -13,9 +13,9 @@ export function Card(props: {
     //const dispatch = useDispatch();
 
     return (
-        <View key={props.key} style={styles.container}>
+        <View style={styles.container}>
             {/*<Image key={props.key} source={{ uri: props.src }} style={{ width: window.screen.width, height: 100 }} />*/}
-            <Text key={props.key} style={styles.title}>sad{props.key}</Text>
+            <Text style={styles.title}>{props.id}</Text>
         </View>
         /*<Button title={"Press me"} onPress={() => {dispatch(fetchRequest())}}></Button>*/
     )

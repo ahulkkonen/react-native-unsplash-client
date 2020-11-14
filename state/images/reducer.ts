@@ -1,5 +1,5 @@
 import { Reducer } from 'redux'
-import { ImageState, ImagesActionTypes } from './types'
+import { ImageState, ImagesActionTypes, UnsplashItem } from './types'
 
 export const initialState: ImageState = {
   data: [],
@@ -10,12 +10,19 @@ export const initialState: ImageState = {
 const reducer: Reducer<ImageState> = (state = initialState, action) => {
     console.log(action);
 
+    console.log(JSON.stringify(state))
+
   switch (action.type) {
     case ImagesActionTypes.FETCH_REQUEST: {
       return { ...state, loading: true }
     }
     case ImagesActionTypes.FETCH_SUCCESS: {
-      return { ...state, loading: false, data: [...state.data, action.payload] }
+        /**
+         * merge arrays instead of nesting them like [[<images>], [<images>]]
+         */
+        const oldImages = state.data.filter(image => !action.payload.data.some((newImage: UnsplashItem) => image.id === newImage.id));
+
+        return { ...state, loading: false, data: oldImages.concat(action.payload) }
     }
     case ImagesActionTypes.FETCH_ERROR: {
       return { ...state, loading: false, errors: action.payload }

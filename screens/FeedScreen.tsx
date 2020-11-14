@@ -22,10 +22,19 @@ export default function FeedScreen() {
   // initial fetch
   if (images.length === 0) fetchImages();
 
+  {console.log(images)}
+
   return (
+    
     <View style={styles.container}>
       {/* print images */}
-      {images.map(image => <Card key={image.id} src={getImageSrc(image)} id={image.id} />)}
+      {images.map(image => {
+        console.log(image.id);
+
+        return(
+          <Card key={image.id} src={getImageSrc(image)} id={image.id} />
+        )
+      })}
 
       <Text style={styles.title}>{}</Text>
 
