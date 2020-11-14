@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { FlatList, StyleSheet, ListRenderItem } from 'react-native';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Card } from '../components/Card';
 import { useSelector } from 'react-redux'
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+import { View } from '../components/Themed';
 import { ApplicationState } from '../state';
 import { fetchRequest } from '../state/images/actions';
-import { getImageSrc } from '../utils/images';
 import { UnsplashItem } from '../state/images/types';
 
 export default function FeedScreen() {
@@ -26,7 +24,7 @@ export default function FeedScreen() {
   { console.log(images) }
 
   const renderItem = ({ item }: { item: UnsplashItem }) => (
-    <Card key={item.id} src={getImageSrc(item)} id={item.id} />
+    <Card key={item.id} item={item} favorite={false} />
   );
 
   return (
@@ -62,22 +60,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-/*const mapStateToProps = ({ images }: ApplicationState) => ({
-  loading: images.loading,
-  errors: images.errors,
-  data: images.data
-})
-
-// mapDispatchToProps is especially useful for constraining our actions to the connected component.
-// You can access these via `this.props`.
-const mapDispatchToProps = {
-  fetchRequest
-}
-
-// Now let's connect our component!
-// With redux v4's improved typings, we can finally omit generics here.
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FeedScreen)*/

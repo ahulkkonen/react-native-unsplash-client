@@ -1,50 +1,69 @@
 import React from 'react';
 import { ActivityIndicator, Button, Image, ImageBackground, StyleSheet, TouchableOpacity, Animated, TouchableHighlight, GestureResponderEvent } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
-import { addFavorite } from '../state/favorites/actions';
+import { addFavorite, removeFavorite } from '../state/favorites/actions';
 import { fetchRequest } from '../state/images/actions';
 import { Text, View } from '../components/Themed';
 import { Ionicons } from '@expo/vector-icons';
+import { UnsplashItem } from '../state/images/types';
+import { getImageSrc } from '../utils/images';
 
 export function Card(props: {
     key: string,
-    id: string,
-    src: string,
-}) {
-    //const dispatch = useDispatch();
+    favorite: boolean,
+    item: UnsplashItem
+}) {
+    const id = props.item;
+
+    const dispatch = useDispatch();
 
     let [loading, setLoading] = React.useState(true);
     const imageOpacity = new Animated.Value(0);
 
-    const handleHeartPressed = (event: GestureResponderEvent) => {
-        setHeartPressed(!heartPressed);
+    const handleImageClicked = (event: GestureResponderEvent) => {
     }
 
-    const [heartPressed, setHeartPressed] = React.useState(false);
+    const handleHeartPressed = (event: GestureResponderEvent) => {
+        if (!favorite) {
+            dispatch(addFavorite(id));
+        } else {
+            dispatch(removeFavorite(id));
+        }
+
+        setFavorite(!favorite);
+    }
+
+    const [favorite, setFavorite] = React.useState(props.favorite);
 
     return (
         <View style={styles.container}>
             {loading && <ActivityIndicator size="large" animating={loading} />}
 
-            <Animated.View style={
+            <Animated.View
+                style=
                 {
-                    width: '100%',
-                    height: '100%',
-                    maxHeight: loading ? 0 : '100%',
+                    {
+                        width: '100%',
+                        height: '100%',
+                        maxHeight: loading ? 0 : '100%',
+                    }
                 }
-            }>
+            >
                 <ImageBackground
-                    source={{ uri: props.src }}
+                    source={{ uri: getImageSrc(props.item) }}
                     style={styles.image}
 
                     onLoadEnd={() => {
                         setLoading(false);
                     }}
                 >
-                    <View style={{backgroundColor: 'transparent',flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', marginRight: 20, marginBottom: 20}}>
+                    <View style={{ backgroundColor: 'transparent', flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', marginRight: 20, marginBottom: 20 }}>
+                        <TouchableOpacity style={{position: 'absolute', width: '100%', height: '100%'}} onPress={handleImageClicked}>
+
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={handleHeartPressed}>
-                            <Ionicons style={{}} name={(heartPressed) ? 'ios-heart' : 'ios-heart-empty'} color={'#ff0000'} size={38} />
-                         </TouchableOpacity>
+                            <Ionicons style={{}} name={(favorite) ? 'ios-heart' : 'ios-heart-empty'} color={'#ff0000'} size={38} />
+                        </TouchableOpacity>
                     </View>
                 </ImageBackground>
             </Animated.View>

@@ -8,7 +8,6 @@ export const initialState: FavoritesState = {
 const reducer: Reducer<FavoritesState> = (state = initialState, action) => {
   switch (action.type) {
     case FavoritesActionTypes.ADD_FAVORITE: {
-        console.log(action);
       return { ...state, data: [...state.data, action.payload] }
     }
     case FavoritesActionTypes.REMOVE_FAVORITE: {
