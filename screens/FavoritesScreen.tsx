@@ -12,8 +12,6 @@ import { getImageSrc } from '../utils/images';
 import { UnsplashItem } from '../state/images/types';
 
 export default function FavoitesScreen() {
-  const dispatch = useDispatch();
-
   const favorites = useSelector((state: ApplicationState) => state.favorites.data);
 
   { console.log(favorites) }

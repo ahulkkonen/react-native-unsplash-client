@@ -7,33 +7,39 @@ import { Text, View } from '../components/Themed';
 import { Ionicons } from '@expo/vector-icons';
 import { UnsplashItem } from '../state/images/types';
 import { getImageSrc } from '../utils/images';
+import { ApplicationState } from '../state';
 
 export function Card(props: {
     key: string,
     favorite: boolean,
     item: UnsplashItem
 }) {
-    const id = props.item;
+    const id = props.item.id;
 
     const dispatch = useDispatch();
 
     let [loading, setLoading] = React.useState(true);
-    const imageOpacity = new Animated.Value(0);
 
+    const favorites = useSelector((state: ApplicationState) => state.favorites.data);
+
+    React.useEffect(() => {
+        if (favorites.find((image: UnsplashItem) => image.id === id) === undefined) setFavorite(false);
+    }, [favorites])
+    
     const handleImageClicked = (event: GestureResponderEvent) => {
     }
 
     const handleHeartPressed = (event: GestureResponderEvent) => {
-        if (!favorite) {
-            dispatch(addFavorite(id));
+        if (!isFavorite) {
+            dispatch(addFavorite(props.item));
         } else {
-            dispatch(removeFavorite(id));
+            dispatch(removeFavorite(props.item));
         }
 
-        setFavorite(!favorite);
+        setFavorite(!isFavorite);
     }
 
-    const [favorite, setFavorite] = React.useState(props.favorite);
+    const [isFavorite, setFavorite] = React.useState(props.favorite);
 
     return (
         <View style={styles.container}>
@@ -62,7 +68,7 @@ export function Card(props: {
 
                         </TouchableOpacity>
                         <TouchableOpacity onPress={handleHeartPressed}>
-                            <Ionicons style={{}} name={(favorite) ? 'ios-heart' : 'ios-heart-empty'} color={'#ff0000'} size={38} />
+                            <Ionicons style={{}} name={(isFavorite) ? 'ios-heart' : 'ios-heart-empty'} color={'#ff0000'} size={38} />
                         </TouchableOpacity>
                     </View>
                 </ImageBackground>
