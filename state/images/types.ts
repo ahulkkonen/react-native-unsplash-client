@@ -4,6 +4,11 @@ export enum ImagesActionTypes {
     FETCH_ERROR = '@@IMAGES/FETCH_ERROR'
 }
 
+export enum ImageQualityType {
+    THUMB = 'thumb',
+    HIGH_QUALITY = 'regular'
+}
+
 export interface ImageState {
     readonly loading: boolean
     readonly data: UnsplashItem[]

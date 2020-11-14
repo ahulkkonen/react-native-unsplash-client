@@ -52,7 +52,7 @@ function FeedNavigator() {
       <FeedStack.Screen
         name="FeedScreen"
         component={FeedScreen}
-        options={{ headerTitle: 'Unsplash' }}
+        options={{ headerTitle: 'Unsplash Feed' }}
       />
     </FeedStack.Navigator>
   );
