@@ -14,7 +14,7 @@ export function Card(props: {
 
     return (
         <View style={styles.container}>
-            <Image key={props.key} source={{ uri: props.src }} style={styles.image} />
+            <Image source={{ uri: props.src }} style={styles.image} />
         </View>
     )
 }
@@ -23,15 +23,19 @@ const styles = StyleSheet.create({
     container: {
         margin: 'auto',
         width: '90%',
-        height: '128px',
+        height: '160px',
         marginBottom: 20,
         backgroundColor: 'grey',
-        borderWidth: 1,
+        borderWidth: 0,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         borderBottomLeftRadius: 5,
         borderBottomRightRadius: 5,
-        overflow: 'hidden'
+        overflow: 'hidden',
+        shadowOffset: {width: 0, height: 0},
+        shadowRadius: 10,
+        shadowColor: 'rgba(0, 0, 0, 0.5)',
+
     },
 
     image: {
