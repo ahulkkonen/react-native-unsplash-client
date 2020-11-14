@@ -14,11 +14,11 @@ Unsplash image browser app made in React Native (+Expo). Created for self learni
 ✅ React Native  
 
 ## Installation
-Create .env file with 
+Create .env file with Unsplash API key. [Get your key here](https://unsplash.com/developers).
 ```
 UNSPLASH_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
-[Get your key here](https://unsplash.com/developers). When that is done you can run
+When that is complete, run yarn
 ```bash
 yarn
 ```
