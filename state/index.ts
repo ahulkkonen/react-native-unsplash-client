@@ -8,7 +8,6 @@ import { imagesReducer } from './images/reducer'
 import { FavoritesState } from './favorites/types'
 import { favoritesReducer } from './favorites/reducer'
 
-
 // The top-level state object
 export interface ApplicationState {
   images: ImageState

@@ -14,7 +14,7 @@ export default function App() {
   const colorScheme = useColorScheme();
 
   const initialState = {};
-  const store = configureStore(history, initialState)
+  const store = configureStore(initialState)
 
   if (!isLoadingComplete) {
     return null;

@@ -8,7 +8,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 // Import the state interface and our combined reducers/sagas.
 import { ApplicationState, createRootReducer, rootSaga } from './state'
 
-export default function configureStore(history: History, initialState: ApplicationState | any): Store<ApplicationState> {
+export default function configureStore(initialState: ApplicationState | any): Store<ApplicationState> {
   // create the composing function for our middlewares
   const composeEnhancers = composeWithDevTools({})
   // create the redux-saga middleware

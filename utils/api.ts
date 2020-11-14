@@ -1,4 +1,4 @@
-const API_KEY = '';
+const API_KEY = process.env.UNSPLASH_API_KEY;
 const API_ENDPOINT = 'https://api.unsplash.com';
 const API_COUNT = 30;
 const API_ORIENTATION = 'landscape';
@@ -11,7 +11,8 @@ async function callApi(method: string, url: string, path: string, queryParams?: 
             Accept: 'application/json'
         }
     })
-    return res.json()
+    console.log(res.json());
+    return res.json();
 }
 
 function generateQueryParams() {
@@ -20,12 +21,12 @@ function generateQueryParams() {
     queryParams = queryParams.concat(`&orientation=${API_ORIENTATION}`);
     queryParams = queryParams.concat(`&count=${API_COUNT}`);
 
-    if (API_FEATURED) queryParams = queryParams.concat('&featured=');
+    if (API_FEATURED) queryParams = queryParams.concat('&featured');
 
     return queryParams;
 }
 
 
 export async function fetchImages() {
-    callApi('get', API_ENDPOINT, '/photos/random', generateQueryParams())
+    return await callApi('get', API_ENDPOINT, '/photos/random', generateQueryParams())
 }
