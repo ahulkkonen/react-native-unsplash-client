@@ -8,5 +8,7 @@ export const fetchRequest = () => action(ImagesActionTypes.FETCH_REQUEST)
 
 // Remember, you can also pass parameters into an action creator. Make sure to
 // type them properly as well.
-export const fetchSuccess = (data: UnsplashItem[]) => action(ImagesActionTypes.FETCH_SUCCESS, data)
-export const fetchError = (message: string) => action(ImagesActionTypes.FETCH_ERROR, message)
+export const fetchSuccess = (data: UnsplashItem[]) =>
+    action(ImagesActionTypes.FETCH_SUCCESS, data)
+export const fetchError = (message: string) =>
+    action(ImagesActionTypes.FETCH_ERROR, message)

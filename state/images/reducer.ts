@@ -4,18 +4,18 @@ import { ImageState, ImagesActionTypes, UnsplashItem } from './types'
 export const initialState: ImageState = {
     data: [],
     errors: undefined,
-    loading: false
+    loading: false,
 }
 
 const mergeArrays = (...arrays: any[]) => {
-    let jointArray: any[] = []
+    let jointArray: any[] = []
 
-    arrays.forEach(array => {
+    arrays.forEach((array) => {
         jointArray = [...jointArray, ...array]
     })
 
-    const uniqueArray = jointArray.reduce((newArray, item) =>{
-        if (newArray.includes(item)){
+    const uniqueArray = jointArray.reduce((newArray, item) => {
+        if (newArray.includes(item)) {
             return newArray
         } else {
             return [...newArray, item]
@@ -27,15 +27,15 @@ const mergeArrays = (...arrays: any[]) => {
 
 const reducer: Reducer<ImageState> = (state = initialState, action) => {
     switch (action.type) {
-        case ImagesActionTypes.FETCH_REQUEST: {            
+        case ImagesActionTypes.FETCH_REQUEST: {
             return { ...state, loading: true }
         }
         case ImagesActionTypes.FETCH_SUCCESS: {
             /**
              * merge arrays instead of nesting them like [[<images>], [<images>]]
              */
-            let newState = mergeArrays(state.data, action.payload);
-        
+            let newState = mergeArrays(state.data, action.payload)
+
             return { ...state, loading: false, data: newState }
         }
         case ImagesActionTypes.FETCH_ERROR: {

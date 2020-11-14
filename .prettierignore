@@ -1,0 +1,6 @@
+.expo/
+.expo-shared/
+*.md
+*.txt
+*.json
+.prettierrc

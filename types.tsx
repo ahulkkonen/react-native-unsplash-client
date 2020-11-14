@@ -1,28 +1,28 @@
 export type RootStackParamList = {
-  Root: undefined;
-  ViewImage: undefined;
-  NotFound: undefined;
-};
+    Root: undefined
+    ViewImage: undefined
+    NotFound: undefined
+}
 
 export type BottomTabParamList = {
-  Feed: undefined;
-  Favorites: undefined;
-};
+    Feed: undefined
+    Favorites: undefined
+}
 
 export type FeedParamList = {
-  FeedScreen: undefined;
-};
+    FeedScreen: undefined
+}
 
 export type FavoritesParamList = {
-  FavoritesScreen: undefined;
-};
+    FavoritesScreen: undefined
+}
 
 export type ViewImageParamList = {
-  ViewImageScreen: undefined;
-};
+    ViewImageScreen: undefined
+}
 
 export type Color = {
-  r: number,
-  g: number,
-  b: number
+    r: number
+    g: number
+    b: number
 }

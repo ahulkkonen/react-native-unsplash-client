@@ -1,4 +1,4 @@
-import { UnsplashItem } from "../images/types";
+import { UnsplashItem } from '../images/types'
 
 export enum FavoritesActionTypes {
     ADD_FAVORITE = '@@FAVORITES/ADD_FAVORITE',
@@ -8,4 +8,3 @@ export enum FavoritesActionTypes {
 export interface FavoritesState {
     readonly data: UnsplashItem[]
 }
-  

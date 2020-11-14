@@ -1,49 +1,69 @@
-import React from 'react';
-import { ActivityIndicator, Share, Button, Image, ImageBackground, StyleSheet, TouchableOpacity, Animated, TouchableHighlight, GestureResponderEvent, Dimensions } from 'react-native';
+import React from 'react'
+import {
+    ActivityIndicator,
+    Share,
+    Button,
+    Image,
+    ImageBackground,
+    StyleSheet,
+    TouchableOpacity,
+    Animated,
+    TouchableHighlight,
+    GestureResponderEvent,
+    Dimensions,
+} from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import { addFavorite, removeFavorite } from '../state/favorites/actions';
-import { fetchRequest } from '../state/images/actions';
-import { Text, View } from '../components/Themed';
-import { Ionicons } from '@expo/vector-icons';
-import { UnsplashItem } from '../state/images/types';
-import { getImageSrc } from '../utils/images';
-import { ApplicationState } from '../state';
+import { addFavorite, removeFavorite } from '../state/favorites/actions'
+import { fetchRequest } from '../state/images/actions'
+import { Text, View } from '../components/Themed'
+import { Ionicons } from '@expo/vector-icons'
+import { UnsplashItem } from '../state/images/types'
+import { getImageSrc } from '../utils/images'
+import { ApplicationState } from '../state'
 
 export function Card(props: {
-    key: string,
-    favorite: boolean,
-    item: UnsplashItem,
+    key: string
+    favorite: boolean
+    item: UnsplashItem
     navigation: any
 }) {
-    const id = props.item.id;
-    let isUnmounted = false;
+    const id = props.item.id
+    let isUnmounted = false
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
     const onShare = async () => {
         try {
-            const description = (props.item.description) ? `\n${props.item.description}` : '';
-            
+            const description = props.item.description
+                ? `\n${props.item.description}`
+                : ''
+
             await Share.share({
                 message: `Check out this cool picture at Unsplash:\n\n${props.item.links.html}${description}`,
-            });
+            })
         } catch (error) {
-            console.error(error.message);
+            console.error(error.message)
         }
-    };
+    }
 
-    let [loading, setLoading] = React.useState(true);
+    let [loading, setLoading] = React.useState(true)
 
-    const favorites = useSelector((state: ApplicationState) => state.favorites.data);
+    const favorites = useSelector(
+        (state: ApplicationState) => state.favorites.data,
+    )
 
     React.useEffect(() => {
-        if (favorites.find((image: UnsplashItem) => image.id === id) === undefined) setFavorite(false);
+        if (
+            favorites.find((image: UnsplashItem) => image.id === id) ===
+            undefined
+        )
+            setFavorite(false)
     }, [favorites])
 
     React.useEffect(() => {
         return () => {
             // Anything in here is fired on component unmount.
-            isUnmounted = true;
+            isUnmounted = true
         }
     }, [])
 
@@ -53,66 +73,111 @@ export function Card(props: {
 
     const handleHeartPressed = (event: GestureResponderEvent) => {
         if (!isFavorite) {
-            dispatch(addFavorite(props.item));
+            dispatch(addFavorite(props.item))
         } else {
-            dispatch(removeFavorite(props.item));
+            dispatch(removeFavorite(props.item))
         }
 
-        setFavorite(!isFavorite);
+        setFavorite(!isFavorite)
     }
 
-    const [isFavorite, setFavorite] = React.useState(props.favorite);
+    const [isFavorite, setFavorite] = React.useState(props.favorite)
 
     return (
         <View style={styles.container}>
-            {loading && <ActivityIndicator size="large" animating={loading} color="#3396dc" />}
+            {loading && (
+                <ActivityIndicator
+                    size="large"
+                    animating={loading}
+                    color="#3396dc"
+                />
+            )}
 
             <Animated.View
-                style=
-                {
-                    {
-                        width: '100%',
-                        height: '100%',
-                        maxHeight: loading ? 0 : '100%',
-                    }
-                }
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    maxHeight: loading ? 0 : '100%',
+                }}
             >
-                {!loading && <Text style={styles.credits}>{props.item.user.name}</Text>}
+                {!loading && (
+                    <Text style={styles.credits}>{props.item.user.name}</Text>
+                )}
 
-                {!loading && <Text numberOfLines={1} style={styles.description}>
-                    {props.item.description || 'No description'}
-                </Text>}
+                {!loading && (
+                    <Text numberOfLines={1} style={styles.description}>
+                        {props.item.description || 'No description'}
+                    </Text>
+                )}
 
-                {!loading && <Text style={styles.likes}>
-                    <Ionicons style={{ width: 20 }} name='ios-thumbs-up' color={'#ffffff'} size={16} />
-                    &nbsp; {/* forgive me father for I have sinned */}
-                    {props.item.likes}
-                </Text>}
+                {!loading && (
+                    <Text style={styles.likes}>
+                        <Ionicons
+                            style={{ width: 20 }}
+                            name="ios-thumbs-up"
+                            color={'#ffffff'}
+                            size={16}
+                        />
+                        &nbsp; {/* forgive me father for I have sinned */}
+                        {props.item.likes}
+                    </Text>
+                )}
 
                 <ImageBackground
                     source={{ uri: getImageSrc(props.item) }}
                     style={styles.image}
-
                     onLoad={() => {
                         /**
                          * Tried to fix unmount component state updating issue
                          * but it seems its a bug in react native.
-                         * 
+                         *
                          * I removed all useStates to try it out and the same error appeared.
                          */
-                        if (!isUnmounted) setLoading(false);
+                        if (!isUnmounted) setLoading(false)
                     }}
                 >
-                    {!loading &&
-                        <View style={{ backgroundColor: 'transparent', flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', flexDirection: 'row', marginRight: 20, marginBottom: 20 }}>
-                            <TouchableOpacity style={{ position: 'absolute', width: '100%', height: '100%' }} onPress={handleImageClicked} />
+                    {!loading && (
+                        <View
+                            style={{
+                                backgroundColor: 'transparent',
+                                flex: 1,
+                                justifyContent: 'flex-end',
+                                alignItems: 'flex-end',
+                                flexDirection: 'row',
+                                marginRight: 20,
+                                marginBottom: 20,
+                            }}
+                        >
+                            <TouchableOpacity
+                                style={{
+                                    position: 'absolute',
+                                    width: '100%',
+                                    height: '100%',
+                                }}
+                                onPress={handleImageClicked}
+                            />
                             <TouchableOpacity onPress={onShare}>
-                                <Ionicons style={{ marginRight: 10 }} name={'md-share'} color={'#fff'} size={36} />
+                                <Ionicons
+                                    style={{ marginRight: 10 }}
+                                    name={'md-share'}
+                                    color={'#fff'}
+                                    size={36}
+                                />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={handleHeartPressed}>
-                                <Ionicons style={{}} name={(isFavorite) ? 'ios-heart' : 'ios-heart-empty'} color={'#ff0000'} size={38} />
+                                <Ionicons
+                                    style={{}}
+                                    name={
+                                        isFavorite
+                                            ? 'ios-heart'
+                                            : 'ios-heart-empty'
+                                    }
+                                    color={'#ff0000'}
+                                    size={38}
+                                />
                             </TouchableOpacity>
-                        </View>}
+                        </View>
+                    )}
                 </ImageBackground>
             </Animated.View>
         </View>
@@ -139,7 +204,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        alignSelf: 'center'
+        alignSelf: 'center',
     },
 
     image: {
